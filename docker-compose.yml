@@ -1,19 +1,30 @@
 version: '3.8'
 services:
   web:
-    build: .
+    image: project_web
     command: python manage.py runserver 0.0.0.0:8000
+    container_name: vino_web
     ports:
         - "8000:8000"
   postgres:
     image: postgres:13.3
+    container_name: vino_bd
     environment:
-      POSTGRES_DB: "habrdb"
-      POSTGRES_USER: "habrpguser"
-      POSTGRES_PASSWORD: "pgpwd4habr"
+      POSTGRES_DB: "vinissulita"
+      POSTGRES_USER: "ks_chemesov"
+      POSTGRES_PASSWORD: "Gohome"
+      PGDATA: "/var/lib/postgresql/data/vinissulita_db"
     volumes:
       - .:/docker-entrypoint-initdb.d
+      - .:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "5434:5432"
+  vinosita:
+    image: vinosita
+    # build: /home/konstantin/Рабочий стол/home_base_project/vinosita
+    command: python manage.py runserver 0.0.0.0:8001
+    container_name: vinosita
+    ports:
+        - "8001:8001"
 
-      # docker_compose up -d
+      # docker-compose up -d
