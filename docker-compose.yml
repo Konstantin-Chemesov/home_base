@@ -1,7 +1,8 @@
 version: '3.8'
 services:
   web:
-    image: project_web
+    # image: project_web
+    build: /home/konstantin/Рабочий стол/home_base/home_base
     command: python manage.py runserver 0.0.0.0:8000
     container_name: vino_web
     ports:
@@ -20,9 +21,9 @@ services:
     ports:
       - "5434:5432"
   vinosita:
-    image: vinosita
-    # build: /home/konstantin/Рабочий стол/home_base_project/vinosita
-    command: python manage.py runserver 0.0.0.0:8001
+    # image: vinosita
+    build: /home/konstantin/Рабочий стол/home_base/vinissimo_storage
+    command: uvicorn main:app
     container_name: vinosita
     ports:
         - "8001:8001"
